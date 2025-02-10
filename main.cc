@@ -18,7 +18,7 @@ void print(vector<int>& registers, int PC) {
 }
 
 int main() {
-    int PC = 0;
+    int PC = 0; // Program counter
     vector<int> registers(32, 0);
     vector<int> memory(4096, 0);
     vector<string> instructions;
@@ -28,8 +28,42 @@ int main() {
         instructions.emplace_back(line);
     }
 
-    
+    for (auto& instr : instructions) {
+        istringstream iss {instr};
+        string instrName;
+        iss >> instrName;
 
+        int reg1;
+        int reg2;
+        int reg3;
+        int opcode;
 
+        if (instrName == "ADD") {
+            iss >> reg1 >> reg2 >> reg3;
+            registers[reg1] = registers[reg2] + registers[reg3];
+            PC += 4;
+        } else if (instrName == "ADDI") {
+
+        } else if (instrName == "SUB") {
+
+        } else if (instrName == "SUBI") {
+
+        } else if (instrName == "LDUR") {
+
+        } else if (instrName == "STUR") {
+
+        } else if (instrName == "CBZ") {
+
+        } else if (instrName == "CBNZ") {
+
+        } else if (instrName == "B") {
+
+        } else {
+            cerr << "ERROR: Invalid instruction" << endl;
+            return 0;
+        }
+    }
+
+    print(registers, PC);
 }
 
