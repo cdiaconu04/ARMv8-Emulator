@@ -9,7 +9,7 @@ void print(vector<int>& registers, int PC) {
     int len = registers.size();
     for (int i = 0; i < len; i++) {
         cout << "X" << i << ": " << registers[i];
-        if (i + 1 % 5 == 0) {
+        if ((i + 1) % 5 == 0) {
             cout << endl;
         }
     }
@@ -30,7 +30,7 @@ int main() {
 
     int len = instructions.size();
 
-    for (int i = 0; i <= len; ++i) {
+    for (int i = 0; i < len; ++i) {
         istringstream iss {instructions[i]};
         string instrName;
         iss >> instrName;
@@ -101,7 +101,7 @@ int main() {
 
             if (registers[reg1num] == 0) {
                 PC = opcodenum;
-                i = opcodenum / 4;
+                i = opcodenum / 4 - 1;
             } else {
                 PC += 4;
             }
@@ -113,7 +113,7 @@ int main() {
 
             if (registers[reg1num] != 0) {
                 PC = opcodenum;
-                i = opcodenum / 4;
+                i = opcodenum / 4 - 1;
             } else {
                 PC += 4;
             }
@@ -122,8 +122,8 @@ int main() {
 
             opcodenum = stoi(opcode);
             
-            i = opcodenum / 4;
-            PC = opcodenum;
+            PC += 4 * opcodenum;
+            i += opcodenum - 1;
         } else {
             cerr << "ERROR: Invalid instruction" << endl;
             return 0;
